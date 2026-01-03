@@ -13,6 +13,7 @@ class Matrix;
 
 class Vector {
     public:
+        Vector() : data() {};
         Vector(size_t size):data(size){}
         static Vector zeroes(size_t size);
         static Vector ones(size_t size);

@@ -4,10 +4,23 @@
 
 #include "Network.h"
 
-Network::Network(size_t inputs, size_t outputs, size_t hiddenNeurons, size_t hiddenLayers, ActivationFunction hiddenActivation, ActivationFunction outputActivaton, ErrorFunction eFunc, float learningRate) :input(hiddenActivation, hiddenNeurons, inputs), output(outputActivaton, outputs, hiddenNeurons), errorFunction(eFunc), gradients(hiddenLayers+2), deltas(hiddenLayers+2), learningRate(learningRate){
-    for (int i = 0; i < hiddenLayers - 1; ++i) {
+Network::Network(size_t inputs, size_t outputs, size_t hiddenNeurons, size_t hiddenLayers, ActivationFunction hiddenActivation, ActivationFunction outputActivaton, ErrorFunction eFunc, float learningRate) :input(hiddenActivation, hiddenNeurons, inputs), output(outputActivaton, outputs, hiddenNeurons), errorFunction(eFunc), learningRate(learningRate){
+    for (int i = 0; i < hiddenLayers; ++i) {
         this->hiddenLayers.emplace_back(hiddenActivation, hiddenNeurons, hiddenNeurons);
     }
+    gradients.resize(hiddenLayers+2);
+    deltas.resize(hiddenLayers+2);
+
+    gradients[0] = Matrix::zeroes(hiddenNeurons,inputs);
+    deltas[0] = Vector::zeroes(hiddenNeurons);
+
+    for (int i = 0; i < hiddenLayers; ++i) {
+        gradients[i+1] = Matrix::zeroes(hiddenNeurons,hiddenNeurons);
+        deltas[i+1] = Vector::zeroes(hiddenNeurons);
+    }
+
+    gradients[hiddenLayers+1] = Matrix::zeroes(outputs,hiddenNeurons);
+    deltas[hiddenLayers+1] = Vector::zeroes(outputs);
 }
 
 Vector Network::predict(const Vector &X) {
@@ -46,6 +59,17 @@ void Network::train(const std::vector<Vector> &features, const std::vector<Vecto
 
             std::vector<Vector> miniBatchFeatures(batchSize);
             std::vector<Vector> miniBatchClasses(batchSize);
+
+            for (size_t i = 0; i < gradients.size(); ++i) {
+                for (size_t r = 0; r < gradients[i].getRows(); ++r) {
+                    for (size_t c = 0; c < gradients[i].getCols(); ++c) {
+                        gradients[i][r][c] = 0.0f;
+                    }
+                }
+                for (size_t d = 0; d < deltas[i].getSize(); ++d) {
+                    deltas[i][d] = 0.0f;
+                }
+            }
 
             for (int k = 0; k < batchSize; ++k) {
                 miniBatchFeatures[k] = features[j * batchSize + k];

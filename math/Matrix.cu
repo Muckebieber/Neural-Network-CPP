@@ -101,8 +101,18 @@ Matrix Matrix::operator^(float scalar) const {
     Matrix result(this->getRows(),this->getCols());
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
-            result[i][j] *= scalar;
+            result[i][j] =  (*this)[i][j] * scalar;
         }
     }
     return *this;
+}
+
+Matrix Matrix::transpose() const {
+    Matrix result(this->getCols(),this->getRows());
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            result[j][i] =  (*this)[i][j];
+        }
+    }
+    return result;
 }

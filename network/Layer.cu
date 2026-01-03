@@ -28,13 +28,13 @@ Vector Layer::calcDelta(const Vector& classes, ErrorFunction errorFunction) {
 }
 
 Vector Layer::calcDelta(Layer &layer) {
-    Vector error = layer.getW() * layer.getD();
+    Vector error = layer.getW().transpose() * layer.getD();
     this->D = error * NeuralNetworkUtils::applyActivationDerivative(this->activationFunction,nullptr,this->Z);
     return this->D;
 }
 
 Matrix Layer::calcGradients() {
-    this->G = this->D ^ this->Z;
+    this->G = this->D ^ this->X;
     return this->G;
 }
 

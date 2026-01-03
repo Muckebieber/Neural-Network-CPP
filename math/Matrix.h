@@ -25,6 +25,7 @@ class Matrix {
         Matrix& operator/=(float scalar);
         std::vector<float>& operator[](size_t row);
         const std::vector<float>& operator[](size_t row) const;
+        Matrix transpose() const;
     private:
         std::vector<std::vector<float>> matrix;
         size_t rows;
