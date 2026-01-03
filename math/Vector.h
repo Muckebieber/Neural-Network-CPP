@@ -18,9 +18,11 @@ class Vector {
         static Vector ones(size_t size);
         static Vector random(size_t size, float min, float max);
         Vector operator+(const Vector& other)const;
+        Vector& operator+=(const Vector& other);
         Vector operator*(const Vector& other)const;
         Matrix operator^(const Vector& other)const;
         Vector operator-(const Vector& other)const;
+        Vector operator/=(float scalar);
         float& operator[](size_t index);
         const float& operator[](size_t index) const;
         size_t getSize() const;

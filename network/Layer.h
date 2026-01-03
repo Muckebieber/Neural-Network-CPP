@@ -11,12 +11,13 @@
 
 class Layer {
     public:
-        Layer(ActivationFunction activationFunction, int nodes , int nodesPrev) : activationFunction(activationFunction), A(nodes), Z(nodes), W(nodes,nodesPrev), X(nodesPrev), B(nodes), D(nodes), G(nodes,nodesPrev) {};
-        Vector activate(Vector &X);
-        Vector calcDelta(Vector &classes, ErrorFunction errorFunction);
+        Layer(ActivationFunction activationFunction, int nodes , int nodesPrev) : activationFunction(activationFunction), A(nodes), Z(nodes), W(Matrix::random(nodes,nodesPrev,-0.1,0.1)), X(nodesPrev), B(Vector::random(nodes,-0.1,0.1)), D(nodes), G(nodes,nodesPrev) {};
+        Vector activate(const Vector &X);
+        Vector calcDelta(const Vector &classes, ErrorFunction errorFunction);
         Vector calcDelta(Layer& layer);
         Matrix calcGradients();
         void adaptWeights(const Matrix& gradients, float learningRate);
+        void adaptBiases(const Vector& deltas, float learningRate);
         ActivationFunction getActivationFunction() const {return this->activationFunction;}
         const Vector& getA() const {return this->A;}
         const Vector& getZ() const {return this->Z;}

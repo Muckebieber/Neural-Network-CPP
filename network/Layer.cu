@@ -8,15 +8,14 @@
 
 #include "../utils/NeuralNetworkUtils.h"
 
-Vector Layer::activate(Vector &X) {
+Vector Layer::activate(const Vector &X) {
     this->X = X;
-    this->Z = W * X;
-    this->Z = this->Z + this->B;
+    this->Z = this->W * this->X + this->B;
     this->A = NeuralNetworkUtils::applyActivation(this->activationFunction, this->Z);
     return this->A;
 }
 
-Vector Layer::calcDelta(Vector& classes, ErrorFunction errorFunction) {
+Vector Layer::calcDelta(const Vector& classes, ErrorFunction errorFunction) {
     switch (errorFunction) {
         case MSE:
             this->D = NeuralNetworkUtils::MSEDerivative(classes,this->A) * NeuralNetworkUtils::applyActivationDerivative(this->activationFunction,&classes,this->Z);
@@ -37,4 +36,12 @@ Vector Layer::calcDelta(Layer &layer) {
 Matrix Layer::calcGradients() {
     this->G = this->D ^ this->Z;
     return this->G;
+}
+
+void Layer::adaptWeights(const Matrix &gradients, float learningRate) {
+    this->W -= gradients^learningRate;
+}
+
+void Layer::adaptBiases(const Vector &deltas, float learningRate) {
+    this->B = this->B - deltas * learningRate;
 }

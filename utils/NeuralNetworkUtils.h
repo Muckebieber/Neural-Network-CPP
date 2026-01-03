@@ -18,10 +18,10 @@ class NeuralNetworkUtils {
         static float CE(Vector& X_true, Vector& X);
         static Vector sigmoidDerivative(Vector& X);
         static Vector leakyReLUDerivative(Vector& X);
-        static Vector softMaxDerivative(Vector &X_true, Vector &X);
-        static Vector MSEDerivative(Vector &X_true, Vector &X);
+        static Vector softMaxDerivative(const Vector &X_true, Vector &X);
+        static Vector MSEDerivative(const Vector &X_true, Vector &X);
         static Vector applyActivation(ActivationFunction aFunc, Vector &X);
-        static Vector applyActivationDerivative(ActivationFunction aFunc, Vector* X_true, Vector &X);
+        static Vector applyActivationDerivative(ActivationFunction aFunc, const Vector *X_true, Vector &X);
 };
 
 

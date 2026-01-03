@@ -85,7 +85,7 @@ Vector NeuralNetworkUtils::leakyReLUDerivative(Vector& X) {
     return result;
 }
 
-Vector NeuralNetworkUtils::softMaxDerivative(Vector& X_true, Vector& X) {
+Vector NeuralNetworkUtils::softMaxDerivative(const Vector& X_true, Vector& X) {
     Vector result(X.getSize());
     for (int i = 0; i < X.getSize(); ++i) {
         result[i] = X[i] - X_true[i];
@@ -93,7 +93,7 @@ Vector NeuralNetworkUtils::softMaxDerivative(Vector& X_true, Vector& X) {
     return result;
 }
 
-Vector NeuralNetworkUtils::MSEDerivative(Vector& X_true, Vector &X) {
+Vector NeuralNetworkUtils::MSEDerivative(const Vector& X_true, Vector &X) {
     return X-X_true;
 }
 
@@ -109,7 +109,7 @@ Vector NeuralNetworkUtils::applyActivation(ActivationFunction aFunc, Vector& X) 
     }
     throw new std::runtime_error("applyActivation(): Error!");
 }
-Vector NeuralNetworkUtils::applyActivationDerivative(ActivationFunction aFunc,Vector* X_true, Vector& X) {
+Vector NeuralNetworkUtils::applyActivationDerivative(ActivationFunction aFunc, const Vector* X_true, Vector& X) {
     Vector result(X.getSize());
     switch (aFunc) {
         case Sigmoid:
