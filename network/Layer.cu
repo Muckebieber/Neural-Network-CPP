@@ -11,8 +11,8 @@
 Vector Layer::activate(Vector &X) {
     this->X = X;
     this->Z = W * X;
-    this->Z =this->Z + this->B;
-    this->A = NeuralNetworkUtils::applyActivation(this->activationFunction,X);
+    this->Z = this->Z + this->B;
+    this->A = NeuralNetworkUtils::applyActivation(this->activationFunction, this->Z);
     return this->A;
 }
 

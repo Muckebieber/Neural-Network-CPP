@@ -87,3 +87,11 @@ Matrix Vector::operator^(const Vector& v) const {
     }
     return result;
 }
+
+std::string Vector::toString() const {
+    std::string result = "";
+    result += "Vector: ";
+    for (size_t i = 0; i < getSize(); ++i) {
+        result += std::to_string((*this)[i]) + " | ";
+    }
+}

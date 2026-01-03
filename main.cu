@@ -5,6 +5,6 @@
 int main() {
     Layer layer(LeakyReLU,3,2);
     Vector input = Vector::ones(2);
-    layer.activate(input);
+    std::cout << layer.activate(input).toString() << std::endl;
     return 0;
 }

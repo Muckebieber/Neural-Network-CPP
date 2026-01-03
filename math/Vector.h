@@ -6,6 +6,7 @@
 #define NEURONAL_NETWORK_CPP_VECTOR_H
 #include <vector>
 #include <random>
+#include "iostream"
 #include "Matrix.h"
 
 class Matrix;
@@ -23,6 +24,7 @@ class Vector {
         float& operator[](size_t index);
         const float& operator[](size_t index) const;
         size_t getSize() const;
+        std::string toString()const;
     private:
         std::vector<float> data;
 };

@@ -23,8 +23,9 @@ Vector NeuralNetworkUtils::leakyReLU(Vector& X) {
     for (size_t i = 0; i < X.getSize(); i++) {
         if (X[i] >= 0.0) {
             result[i] = X[i];
+        } else {
+            result[i] = 0.01*X[i];
         }
-        result[i] = 0.01*X[i];
     }
     return result;
 }

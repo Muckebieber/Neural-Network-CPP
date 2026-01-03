@@ -18,7 +18,8 @@ class Matrix {
         size_t getRows() const;
         size_t getCols() const;
         Vector operator*(const Vector& other) const;
-        std::vector<float> operator[](size_t row) const;
+        std::vector<float>& operator[](size_t row);
+        const std::vector<float>& operator[](size_t row) const;
     private:
         std::vector<std::vector<float>> matrix;
         size_t rows;
