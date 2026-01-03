@@ -5,9 +5,9 @@
 #ifndef NEURONAL_NETWORK_CPP_MATRIX_H
 #define NEURONAL_NETWORK_CPP_MATRIX_H
 #include <vector>
-
 #include "Vector.h"
 
+class Vector;
 
 class Matrix {
     public:

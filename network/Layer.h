@@ -17,7 +17,7 @@ class Layer {
         Vector calcDelta(Layer& layer);
         Matrix calcGradients();
         void adaptWeights(const Matrix& gradients, float learningRate);
-        const ActivationFunction getActivationFunction() const {return this->activationFunction;}
+        ActivationFunction getActivationFunction() const {return this->activationFunction;}
         const Vector& getA() const {return this->A;}
         const Vector& getZ() const {return this->Z;}
         const Matrix& getW() const {return this->W;}

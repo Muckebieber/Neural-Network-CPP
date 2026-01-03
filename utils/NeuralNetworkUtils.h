@@ -20,7 +20,7 @@ class NeuralNetworkUtils {
         static Vector leakyReLUDerivative(Vector& X);
         static Vector softMaxDerivative(Vector &X_true, Vector &X);
         static Vector MSEDerivative(Vector &X_true, Vector &X);
-        static Vector applyActivation(ActivationFunction aFunc, Vector &X);f
+        static Vector applyActivation(ActivationFunction aFunc, Vector &X);
         static Vector applyActivationDerivative(ActivationFunction aFunc, Vector* X_true, Vector &X);
 };
 

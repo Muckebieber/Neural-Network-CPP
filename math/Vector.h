@@ -6,8 +6,9 @@
 #define NEURONAL_NETWORK_CPP_VECTOR_H
 #include <vector>
 #include <random>
-
 #include "Matrix.h"
+
+class Matrix;
 
 class Vector {
     public:

@@ -108,7 +108,7 @@ Vector NeuralNetworkUtils::applyActivation(ActivationFunction aFunc, Vector& X) 
     }
     throw new std::runtime_error("applyActivation(): Error!");
 }
-Vector NeuralNetworkUtils::applyActivationDerivative(ActivationFunction aFunc,Vector* X_true=nullptr, Vector& X) {
+Vector NeuralNetworkUtils::applyActivationDerivative(ActivationFunction aFunc,Vector* X_true, Vector& X) {
     Vector result(X.getSize());
     switch (aFunc) {
         case Sigmoid:

@@ -9,15 +9,17 @@
 #include "../utils/NeuralNetworkUtils.h"
 
 Vector Layer::activate(Vector &X) {
+    this->X = X;
     this->Z = W * X;
     this->Z =this->Z + this->B;
     this->A = NeuralNetworkUtils::applyActivation(this->activationFunction,X);
+    return this->A;
 }
 
 Vector Layer::calcDelta(Vector& classes, ErrorFunction errorFunction) {
     switch (errorFunction) {
         case MSE:
-            this->D = NeuralNetworkUtils::MSEDerivative(classes,this->A)*NeuralNetworkUtils::applyActivationDerivative(this->activationFunction,*classes,this->Z);
+            this->D = NeuralNetworkUtils::MSEDerivative(classes,this->A); * NeuralNetworkUtils::applyActivationDerivative(this->activationFunction,*classes,this->Z);
             return this->D;
         case CE:
             this->D = NeuralNetworkUtils::softMaxDerivative(classes,this->A);
