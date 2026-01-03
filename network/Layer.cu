@@ -43,5 +43,5 @@ void Layer::adaptWeights(const Matrix &gradients, float learningRate) {
 }
 
 void Layer::adaptBiases(const Vector &deltas, float learningRate) {
-    this->B = this->B - deltas * learningRate;
+    this->B = this->B - deltas *= learningRate;
 }

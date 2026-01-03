@@ -21,6 +21,7 @@ class Vector {
         Vector operator+(const Vector& other)const;
         Vector& operator+=(const Vector& other);
         Vector operator*(const Vector& other)const;
+        Vector operator*=(float scalar)const;
         Matrix operator^(const Vector& other)const;
         Vector operator-(const Vector& other)const;
         Vector operator/=(float scalar);

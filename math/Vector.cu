@@ -78,6 +78,14 @@ Vector Vector::operator*(const Vector& v) const {
     throw std::runtime_error("Illegal Argument Exception");
 }
 
+Vector Vector::operator*=(float scalar) const {
+        Vector result(this->getSize());
+        for (int i = 0; i < this->getSize(); ++i) {
+            result[i] = (*this)[i] * scalar;
+        }
+        return result;
+}
+
 Matrix Vector::operator^(const Vector& v) const {
     Matrix result(this->getSize(), v.getSize());
     for (size_t i = 0; i < this->getSize(); ++i) {
@@ -88,7 +96,7 @@ Matrix Vector::operator^(const Vector& v) const {
     return result;
 }
 Vector Vector::operator/=(float scalar) {
-    for (float value : this->data) {
+    for (float& value : this->data) {
         value /= scalar;
     }
     return *this;

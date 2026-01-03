@@ -77,7 +77,7 @@ void Network::train(const std::vector<Vector> &features, const std::vector<Vecto
             }
             size_t x = 0;
             for (Vector &miniFeature : miniBatchFeatures) {
-                this->backpropagate(miniFeature,classes[x]);
+                this->backpropagate(miniFeature,miniBatchClasses[x]);
                 x++;
             }
 
