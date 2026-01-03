@@ -19,7 +19,7 @@ Vector Layer::activate(Vector &X) {
 Vector Layer::calcDelta(Vector& classes, ErrorFunction errorFunction) {
     switch (errorFunction) {
         case MSE:
-            this->D = NeuralNetworkUtils::MSEDerivative(classes,this->A); * NeuralNetworkUtils::applyActivationDerivative(this->activationFunction,*classes,this->Z);
+            this->D = NeuralNetworkUtils::MSEDerivative(classes,this->A) * NeuralNetworkUtils::applyActivationDerivative(this->activationFunction,&classes,this->Z);
             return this->D;
         case CE:
             this->D = NeuralNetworkUtils::softMaxDerivative(classes,this->A);
